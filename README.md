@@ -31,28 +31,28 @@ Diseñar e implementar la primera fase de una solución integral de Inteligencia
 
 ## 🎯 Definición de Indicadores de Desempeño (KPIs)
 
-Para asegurar que el modelo dimensional responda a las necesidades estratégicas de la empresa, se definieron los siguientes KPIs basándose en los datos relacionales disponibles[cite: 11]:
+Para asegurar que el modelo dimensional responda a las necesidades estratégicas de la empresa, se definieron los siguientes KPIs basándose en los datos relacionales disponibles:
 
 1. 💰 **Ingresos Netos por Ventas:**
    * **Justificación:** Permite evaluar la rentabilidad real de la empresa y el impacto de las políticas de precios.
-   * **Métrica:** Sumatoria del `Precio Unitario` multiplicado por la `Cantidad`, menos el `Descuento` aplicado[cite: 10].
+   * **Métrica:** Sumatoria del `Precio Unitario` multiplicado por la `Cantidad`, menos el `Descuento` aplicado.
    * **Dimensiones de Análisis:** Por Tiempo (Mensual/Trimestral), por Categoría de Producto y por Territorio.
 
 2. 📦 **Volumen de Órdenes Despachadas:**
    * **Justificación:** Mide la carga operativa del negocio, siendo fundamental para planificar el inventario y evaluar la demanda por zonas geográficas.
-   * **Métrica:** Conteo distintivo (Distinct Count) de `OrdenID`[cite: 10].
+   * **Métrica:** Conteo distintivo (Distinct Count) de `OrdenID`.
    * **Dimensiones de Análisis:** Por Cliente, por Empleado a cargo y por Transportista.
 
 3. ⏱️ **Eficiencia Logística (Días de Envío):**
    * **Justificación:** Impacta directamente en la satisfacción del cliente. Permite identificar cuellos de botella logísticos y evaluar el rendimiento de los transportistas.
-   * **Métrica:** Promedio de días transcurridos entre la `FechaOrden` y la `FechaEnvio`[cite: 10].
+   * **Métrica:** Promedio de días transcurridos entre la `FechaOrden` y la `FechaEnvio`.
    * **Dimensiones de Análisis:** Por Transportista y por Ciudad/País de destino.
 
 ---
 
 ## 🏗️ Modelo Dimensional (Metodología Kimball)
 
-Para el diseño del Data Warehouse `KentFoods_DW`, se aplicaron rigurosamente los 4 pasos definidos por Ralph Kimball, optando por un **Esquema de Estrella** para optimizar el rendimiento de las consultas[cite: 11]:
+Para el diseño del Data Warehouse `KentFoods_DW`, se aplicaron rigurosamente los 4 pasos definidos por Ralph Kimball, optando por un **Esquema de Estrella** para optimizar el rendimiento de las consultas:
 
 * 📌 **Paso 1: Elección del Proceso de Negocio:**
   Se seleccionó el proceso de **Ventas y Envíos**, ya que es el núcleo operativo que genera los ingresos de Kent Foods y contiene la mayor cantidad de variables analíticas.
@@ -62,10 +62,10 @@ Para el diseño del Data Warehouse `KentFoods_DW`, se aplicaron rigurosamente lo
 
 * 📦 **Paso 3: Identificación de las Dimensiones:**
   Se crearon las siguientes dimensiones, todas equipadas con Claves Subrogadas (Surrogate Keys) autoincrementables:
-  * `Dim_Cliente`: Agrupa atributos demográficos y de contacto del comprador[cite: 10].
-  * `Dim_Producto`: Contiene la descripción del alimento y su categoría (desnormalizada para evitar copo de nieve)[cite: 10].
-  * `Dim_Empleado`: Personal interno responsable de gestionar la orden, cruzado con su territorio[cite: 10].
-  * `Dim_Transportista`: Empresas encargadas del despacho logístico[cite: 10].
+  * `Dim_Cliente`: Agrupa atributos demográficos y de contacto del comprador.
+  * `Dim_Producto`: Contiene la descripción del alimento y su categoría (desnormalizada para evitar copo de nieve).
+  * `Dim_Empleado`: Personal interno responsable de gestionar la orden, cruzado con su territorio.
+  * `Dim_Transportista`: Empresas encargadas del despacho logístico.
   * `Dim_Tiempo`: Dimensión artificial (Calendario) fundamental para desglosar las ventas por año, semestre, trimestre, mes y día.
 
 * 📈 **Paso 4: Identificación de los Hechos (Fact Table):**
@@ -77,10 +77,10 @@ Para el diseño del Data Warehouse `KentFoods_DW`, se aplicaron rigurosamente lo
 
 ## ⚙️ Arquitectura del Proceso ETL (SSIS)
 
-El poblamiento del Data Warehouse se automatizó utilizando **SQL Server Integration Services (SSIS)**, estructurado en tres fases críticas[cite: 11]:
+El poblamiento del Data Warehouse se automatizó utilizando **SQL Server Integration Services (SSIS)**, estructurado en tres fases críticas:
 
 1. **Extracción (Extract):**
-   * Conexión OLE DB hacia la base de datos transaccional `KentFoods` (Origen)[cite: 11].
+   * Conexión OLE DB hacia la base de datos transaccional `KentFoods` (Origen).
    * Consultas SQL específicas para extraer únicamente los campos necesarios, evitando la sobrecarga del servidor.
 
 2. **Transformación (Transform):**
@@ -90,7 +90,7 @@ El poblamiento del Data Warehouse se automatizó utilizando **SQL Server Integra
    * **Búsquedas (Lookup):** Cruce de las claves naturales (Natural Keys) del sistema transaccional con las Claves Subrogadas (Surrogate Keys) del modelo dimensional para preparar la inserción en la tabla de hechos.
 
 3. **Carga (Load):**
-   * Inserción secuencial utilizando componentes *OLE DB Destination* hacia `KentFoods_DW`[cite: 11].
+   * Inserción secuencial utilizando componentes *OLE DB Destination* hacia `KentFoods_DW`.
    * Se estructuró el flujo para cargar primero las Dimensiones (maestros) y, finalmente, la Tabla de Hechos para respetar la integridad referencial.
 
 ---
