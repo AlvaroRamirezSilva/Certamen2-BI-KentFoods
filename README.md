@@ -1,103 +1,61 @@
-Certamen 2 - Inteligencia de Negocios
-Caso Seleccionado
-Kent Foods - Empresa de venta y envío de alimentos.
+<div align="center">
+  <h1>Certamen 2 - Inteligencia de Negocios</h1>
+  <p><i>Solución de BI para la empresa Kent Foods</i></p>
+  
+  ![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
+  ![SSIS](https://img.shields.io/badge/SSIS-5C2D91?style=for-the-badge&logo=visual-studio&logoColor=white)
+  ![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+</div>
 
-Integrantes
-Álvaro Ramírez Silva
+---
 
-Moisés Larenas Arévalo
+## 📝 Descripción del Problema y Objetivo
+> Kent Foods ha experimentado un crecimiento rápido en los últimos años. Debido a esta expansión, el propietario necesita incorporar Inteligencia de Negocios para analizar los datos transaccionales generados (órdenes, clientes, envíos, productos).
 
-Ignacio Miranda
+**Objetivo:** Diseñar e implementar una solución BI completa para apoyar la toma de decisiones estratégicas, comenzando con un modelo dimensional y un proceso ETL (Fase 1).
 
-Descripción del Problema y Objetivo del Proyecto
-Kent Foods ha experimentado un crecimiento rápido en los últimos años. Debido a esta expansión, el propietario necesita incorporar Inteligencia de Negocios para analizar los datos transaccionales generados (órdenes, clientes, envíos, productos) y apoyar el proceso de toma de decisiones estratégicas para mantener el buen rumbo de la organización. El objetivo de este proyecto es diseñar e implementar una solución BI completa, comenzando con un modelo dimensional y un proceso ETL (Fase 1).
+## 👥 Integrantes y Responsabilidades
 
-KPI Definidos
-Para evaluar el desempeño de Kent Foods, se definieron los siguientes Indicadores Clave de Desempeño:
+| Nombre | Rol / Aportes Principales |
+| :--- | :--- |
+| **Álvaro Ramírez Silva** | Diseño del modelo dimensional y creación de scripts SQL. |
+| **Moisés Larenas Arévalo** | Configuración del repositorio Git y desarrollo del flujo ETL. |
+| **Ignacio Miranda** | Definición de KPI y transformaciones avanzadas en SSIS. |
 
-Ingresos Totales por Ventas: Permite evaluar el rendimiento financiero y el crecimiento de la empresa analizando las ventas por producto, territorio y cliente.
+## 🎯 KPI Definidos
+1. 💰 **Ingresos Totales por Ventas:** Permite evaluar el rendimiento financiero y el crecimiento analizando las ventas por producto, territorio y cliente.
+2. 📦 **Volumen de Órdenes Procesadas:** Mide la carga operativa y la demanda, fundamental para la planificación logística y de inventario.
+3. ⏱️ **Eficiencia en Tiempos de Envío (Días):** Mide la diferencia en días entre la orden y el envío para evaluar el rendimiento de los transportistas.
 
-Volumen de Órdenes Procesadas: Mide la carga operativa y la demanda, fundamental para la planificación logística y de inventario.
+## 🏗️ Modelo Dimensional (Kimball)
+Se aplicaron los 4 pasos de Ralph Kimball para el diseño en **esquema de estrella**:
 
-Eficiencia en Tiempos de Envío (Días de Despacho): Mide la diferencia en días entre la fecha de la orden y la fecha de envío, lo que permite evaluar el rendimiento de los transportistas y la satisfacción del cliente final.
+* 📌 **Proceso de Negocio:** Gestión de Ventas y Envíos de productos.
+* 🔍 **Granularidad:** Línea de artículo dentro de una orden de compra.
+* 📦 **Dimensiones:**
+  * `Dim_Cliente` (Demografía y contacto)
+  * `Dim_Empleado` (Personal gestor)
+  * `Dim_Producto` (Detalle del alimento y categoría)
+  * `Dim_Proveedor` (Origen de productos)
+  * `Dim_Transportista` (Empresa de envío)
+  * `Dim_Territorio` (Ubicación geográfica)
+  * `Dim_Tiempo` (Dimensión artificial de fechas)
+* 📈 **Hechos (Medidas):** Cantidad de productos, Precio Unitario, Descuento, Monto Total (calculado), Días de envío (calculado).
 
-Modelo Dimensional (Metodología Kimball)
-Se aplicaron los 4 pasos de Ralph Kimball para el diseño del modelo dimensional en esquema de estrella:
+## ⚙️ Proceso ETL (Fase 1)
+Implementado mediante **SQL Server Integration Services (SSIS)**:
+- **Extracción:** Desde la base de datos relacional `KentFoods`.
+- **Transformación:** Conversiones de tipos, limpieza de nulos, estandarización de texto y generación de claves subrogadas (Surrogate Keys).
+- **Carga:** Inserción en la base de datos dimensional `KentFoods_DW`.
 
-Selección del Proceso de Negocio: Gestión de Ventas y Envíos de productos.
+## 📂 Estructura del Repositorio
 
-Definición de la Granularidad: El nivel de detalle máximo corresponde a una línea de artículo dentro de una orden de compra (registro a nivel de detalle de orden).
-
-Identificación de las Dimensiones:
-
-Dim_Cliente (Datos demográficos y de contacto del comprador).
-
-Dim_Empleado (Personal interno que gestiona la orden).
-
-Dim_Producto (Detalle del alimento vendido y su categoría).
-
-Dim_Proveedor (Origen de los productos).
-
-Dim_Transportista (Empresa a cargo del envío).
-
-Dim_Territorio (Ubicación geográfica de operaciones).
-
-Dim_Tiempo (Dimensión artificial para analizar fechas de orden y envío).
-
-Identificación de los Hechos (Medidas):
-
-Cantidad de productos.
-
-Precio Unitario.
-
-Descuento.
-
-Monto Total (calculado).
-
-Días de envío (calculado).
-
-Proceso ETL (Fase 1)
-El proceso de Extracción, Transformación y Carga (ETL) fue implementado utilizando SQL Server Integration Services (SSIS).
-
-Extracción: Se extrajeron los datos desde la base de datos relacional original (KentFoods).
-
-Transformación: Se aplicaron conversiones de tipos de datos, limpieza de valores nulos, estandarización de cadenas de texto y generación de claves subrogadas (Surrogate Keys) para mantener el historial en las dimensiones.
-
-Carga: Los datos transformados se insertaron en las tablas de la base de datos dimensional (KentFoods_DW) alojada en SQL Server.
-
-Tecnologías Utilizadas
-Motor de Base de Datos: Microsoft SQL Server (SSMS).
-
-Integración de Datos (ETL): Visual Studio 2019 - SQL Server Integration Services (SSIS).
-
-Control de Versiones: Git y GitHub.
-
-Estructura del Repositorio
-Plaintext
-CERTAMEN2-BI-KentFoods/
-├── database/
-│   ├── scripts/          # Scripts SQL de creación del modelo dimensional
-│   └── backup/           # Backup (.bak) de la base de datos KentFoods_DW
-├── etl/
-│   └── Proyecto_SSIS/    # Solución de Visual Studio con los paquetes .dtsx
-├── docs/                 # Documentación adicional y diagramas
-└── README.md             # Documentación principal del repositorio
-Instrucciones de Ejecución
-Clonar este repositorio en el equipo local.
-
-Restaurar el backup KentFoods_DW.bak ubicado en la carpeta database/backup/ utilizando SQL Server Management Studio.
-
-En caso de no utilizar el backup, ejecutar el script de creación de tablas ubicado en database/scripts/ sobre una base de datos nueva.
-
-Abrir la solución .sln ubicada en la carpeta etl/Proyecto_SSIS/ con Visual Studio (con la extensión de SSIS instalada).
-
-Actualizar los administradores de conexión en el paquete Package.dtsx para que apunten a la instancia local de SQL Server.
-
-Ejecutar el paquete (Botón Iniciar) para visualizar el flujo de datos desde el origen transaccional hacia el destino dimensional.
-
-Distribución de Responsabilidades y Aportes
-Álvaro Ramírez Silva: [Describir aporte, ej: Diseño del modelo dimensional y creación de scripts SQL].
-
-Moisés Larenas Arévalo: [Describir aporte, ej: Configuración del repositorio Git, resolución de conflictos y desarrollo del flujo ETL principal].
-
-Ignacio Miranda: [Describir aporte, ej: Definición de KPI, documentación técnica y transformaciones avanzadas en SSIS].
+```text
+📦 CERTAMEN2-BI-KentFoods
+ ┣ 📂 database
+ ┃ ┣ 📂 scripts          # Scripts SQL de creación del modelo dimensional
+ ┃ ┗ 📂 backup           # Backup (.bak) de KentFoods_DW
+ ┣ 📂 etl
+ ┃ ┗ 📂 Proyecto_SSIS    # Solución de Visual Studio (.dtsx)
+ ┣ 📂 docs               # Documentación adicional y diagramas
+ ┗ 📜 README.md          # Documentación principal
