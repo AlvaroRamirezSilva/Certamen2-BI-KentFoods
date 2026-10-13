@@ -25,7 +25,7 @@ Diseñar e implementar la primera fase de una solución integral de Inteligencia
 | :--- | :--- | :--- |
 | **Álvaro Ramírez Silva** | Data Architect | Diseño conceptual del modelo en estrella. Creación de los scripts DDL en SQL Server para dimensiones y tabla de hechos. |
 | **Moisés Larenas Arévalo** | Data Engineer | Configuración y gestión del repositorio Git. Desarrollo, orquestación y validación del flujo de datos (ETL) en Visual Studio (SSIS). |
-| **Ignacio Miranda** | Business Analyst | Análisis del modelo transaccional. Levantamiento y justificación de KPIs. Aplicación de reglas de limpieza y transformación de datos. |
+| **Ignacio Miranda Arbona** | Business Analyst | Análisis del modelo transaccional. Levantamiento y justificación de KPIs. Aplicación de reglas de limpieza y transformación de datos. |
 
 ---
 
