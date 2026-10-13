@@ -65,7 +65,6 @@ Para el diseño del Data Warehouse `KentFoods_DW`, se aplicaron rigurosamente lo
   * `Dim_Cliente`: Agrupa atributos demográficos y de contacto del comprador[cite: 10].
   * `Dim_Producto`: Contiene la descripción del alimento y su categoría (desnormalizada para evitar copo de nieve)[cite: 10].
   * `Dim_Empleado`: Personal interno responsable de gestionar la orden, cruzado con su territorio[cite: 10].
-  * `Dim_Proveedor`: Origen del suministro de los alimentos[cite: 10].
   * `Dim_Transportista`: Empresas encargadas del despacho logístico[cite: 10].
   * `Dim_Tiempo`: Dimensión artificial (Calendario) fundamental para desglosar las ventas por año, semestre, trimestre, mes y día.
 
