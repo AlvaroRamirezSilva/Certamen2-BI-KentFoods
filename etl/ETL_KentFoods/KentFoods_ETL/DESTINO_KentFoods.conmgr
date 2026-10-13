@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="JOLOLONOTE.KentFoods_DW"
+  DTS:DTSID="{21BE7A3A-AC2E-4999-8A2F-EF93BF62A409}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=JOLOLONOTE;Initial Catalog=KentFoods_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-KentFoods_ETL-{21BE7A3A-AC2E-4999-8A2F-EF93BF62A409}JOLOLONOTE.KentFoods_DW;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
