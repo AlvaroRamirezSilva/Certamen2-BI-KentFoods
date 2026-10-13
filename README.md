@@ -12,7 +12,7 @@
 
 ## 📝 Descripción del Problema y Objetivo General
 
-> **Contexto:** Kent Foods es una empresa dedicada a la venta y envío de alimentos que ha experimentado un crecimiento acelerado durante los últimos años[cite: 10]. Actualmente, su volumen de datos transaccionales ha superado la capacidad de análisis manual, generando cuellos de botella en la evaluación de ventas y la gestión logística[cite: 10].
+> **Contexto:** Kent Foods es una empresa dedicada a la venta y envío de alimentos que ha experimentado un crecimiento acelerado durante los últimos años. Actualmente, su volumen de datos transaccionales ha superado la capacidad de análisis manual, generando cuellos de botella en la evaluación de ventas y la gestión logística.
 
 **Objetivo del Proyecto:** 
 Diseñar e implementar la primera fase de una solución integral de Inteligencia de Negocios (BI) que centralice, limpie y estructure los datos operativos de Kent Foods. A través de la construcción de un Data Warehouse (DW) y un proceso automatizado de Extracción, Transformación y Carga (ETL), se busca habilitar una plataforma analítica que permita a la gerencia monitorear indicadores clave, identificar patrones de compra y optimizar los tiempos de despacho.
