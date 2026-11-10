@@ -1,10 +1,11 @@
 <div align="center">
-  <h1>📊 Proyecto de Inteligencia de Negocios: Fase 1</h1>
+  <h1>📊 Proyecto de Inteligencia de Negocios: Fase 1 y Fase 2</h1>
   <p><i>Solución de Análisis Multidimensional para Kent Foods</i></p>
   <p><b>Universidad Técnica Federico Santa María</b></p>
   
   ![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
   ![SSIS](https://img.shields.io/badge/SSIS-5C2D91?style=for-the-badge&logo=visual-studio&logoColor=white)
+  ![SSAS](https://img.shields.io/badge/SSAS-0078D4?style=for-the-badge&logo=visual-studio&logoColor=white)
   ![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 </div>
 
@@ -15,17 +16,17 @@
 > **Contexto:** Kent Foods es una empresa dedicada a la venta y envío de alimentos que ha experimentado un crecimiento acelerado durante los últimos años. Actualmente, su volumen de datos transaccionales ha superado la capacidad de análisis manual, generando cuellos de botella en la evaluación de ventas y la gestión logística.
 
 **Objetivo del Proyecto:** 
-Diseñar e implementar la primera fase de una solución integral de Inteligencia de Negocios (BI) que centralice, limpie y estructure los datos operativos de Kent Foods. A través de la construcción de un Data Warehouse (DW) y un proceso automatizado de Extracción, Transformación y Carga (ETL), se busca habilitar una plataforma analítica que permita a la gerencia monitorear indicadores clave, identificar patrones de compra y optimizar los tiempos de despacho.
+Diseñar e implementar una solución integral de Inteligencia de Negocios (BI) en dos fases que centralice, limpie y estructure los datos operativos de Kent Foods. Mediante la construcción de un Data Warehouse (DW), un proceso ETL automatizado, un Cubo Multidimensional (OLAP) y un panel interactivo, se habilita una plataforma analítica robusta para que la gerencia monitoree indicadores clave, analice patrones de compra y optimice la eficiencia logística.
 
 ---
 
 ## 👥 Equipo de Trabajo y Responsabilidades
 
-| Nombre | Rol Técnico | Aportes Principales en Fase 1 |
+| Nombre | Rol Técnico | Aportes Principales en el Proyecto |
 | :--- | :--- | :--- |
 | **Álvaro Ramírez Silva** | Data Architect | Diseño conceptual del modelo en estrella. Creación de los scripts DDL en SQL Server para dimensiones y tabla de hechos. |
 | **Moisés Larenas Arévalo** | Data Engineer | Configuración y gestión del repositorio Git. Desarrollo, orquestación y validación del flujo de datos (ETL) en Visual Studio (SSIS). |
-| **Ignacio Miranda Arbona** | Business Analyst | Análisis del modelo transaccional. Levantamiento y justificación de KPIs. Aplicación de reglas de limpieza y transformación de datos. |
+| **Ignacio Miranda Arbona** | Business Analyst | Análisis del modelo transaccional. Levantamiento y justificación de KPIs. Aplicación de reglas de limpieza, transformación de datos y soporte en modelamiento OLAP. |
 
 ---
 
@@ -95,14 +96,33 @@ El poblamiento del Data Warehouse se automatizó utilizando **SQL Server Integra
 
 ---
 
+## 🧊 Fase 2: Análisis Multidimensional (SSAS) y Visualización (Power BI)
+
+Complementando la infraestructura de la Fase 1, la segunda etapa del proyecto potencia la explotación analítica de los datos:
+
+1. **Cubo Multidimensional (SSAS):**
+   * **Vista de Origen de Datos (DSV):** Integración relacional del Data Warehouse dentro de SQL Server Analysis Services.
+   * **Definición del Cubo:** Configuración del cubo operativo mapeando las dimensiones (`D_CLIENTE`, `D_PRODUCTO`, `D_EMPLEADO`, `D_TRANSPORTISTA`, `D_TIEMPO`) con el grupo de medidas de ventas.
+   * **Procesamiento:** Despliegue y procesamiento exitoso del modelo multidimensional para habilitar consultas OLAP de alto rendimiento.
+
+2. **Dashboard Interactivo en Power BI:**
+   * **Conexión en Vivo (*Live Connection*):** Enlace directo desde Power BI Desktop hacia el servidor de Analysis Services.
+   * **Visualización Gerencial:** Reportes dinámicos que incluyen segmentadores (*slicers*) por cliente y producto, gráficos de columnas para el análisis de ingresos netos y tarjetas de resumen para el control de KPIs logísticos y comerciales.
+
+---
+
 ## 📂 Estructura del Repositorio
 
 ```text
 📦 CERTAMEN2-BI-KentFoods
  ┣ 📂 database
  ┃ ┣ 📂 scripts          # Archivos .sql con DDL del Data Warehouse (Dimensiones y Hechos)
- ┃ ┗ 📂 backup           # Archivo KentFoods_DW.bak con la base de datos ya poblada
+ ┃ ┗ 📂 backup           # Archivo de respaldo con la base de datos poblada
  ┣ 📂 etl
- ┃ ┗ 📂 Proyecto_SSIS    # Archivos .sln, .dtproj y paquetes .dtsx del flujo en Visual Studio
+ ┃ ┗ 📂 Proyecto_SSIS    # Archivos del flujo ETL en Visual Studio (SSIS)
+ ┣ 📂 olap
+ ┃ ┗ 📂 Cubo             # Proyecto multidimensional de Analysis Services (SSAS)
+ ┣ 📂 powerbi
+ ┃ ┗ 📜 Cubo.pbix        # Reporte y panel interactivo conectado al cubo OLAP
  ┣ 📂 docs               # Diagramas de modelo relacional vs dimensional y documentos anexos
  ┗ 📜 README.md          # Documentación técnica principal
